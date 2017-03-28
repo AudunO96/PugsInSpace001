@@ -3,7 +3,6 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "LevelDoor.h"
 #include "PugCharacter.generated.h"
 
 UCLASS()
@@ -24,7 +23,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
 	//frem og tilbake (w, s)
 	UFUNCTION()
@@ -33,29 +32,8 @@ public:
 		void MoveSides(float Val);
 
 	UFUNCTION()
-		void Interact();
-
-	UFUNCTION()
 		void StartJump();
-
 	UFUNCTION()
 		void StopJump();
-
-	UFUNCTION()
-		void OnDeath();
-
-	UFUNCTION()
-		void Damage(int DamageAmount);
-
-	UPROPERTY(EditAnywhere)
-		int32 Health = 5;
-
-	UPROPERTY(EditAnywhere)
-		float InvulTime;
-
-	float InvulTimer;
-
-	bool InvincibilityFrame;
-
-	ALevelDoor* Door;
+	
 };
