@@ -24,18 +24,29 @@ void APugCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (InvincibilityFrame)
+	{
+		InvulTimer += DeltaTime;
+		if (InvulTimer >= InvulTime)
+		{
+			InvincibilityFrame = false;
+		}
+	}
+
 }
 
 // Called to bind functionality to input
-void APugCharacter::SetupPlayerInputComponent(UInputComponent* InputComponent)
+void APugCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(InputComponent);
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	InputComponent->BindAxis("MoveForward", this, &APugCharacter::MoveForward);
 	InputComponent->BindAxis("MoveSides", this, &APugCharacter::MoveSides);
 
 	InputComponent->BindAction("Jump", IE_Pressed, this, &APugCharacter::StartJump);
 	InputComponent->BindAction("Jump", IE_Released, this, &APugCharacter::StopJump);
+
+	InputComponent->BindAction("Interact", IE_Pressed, this, &APugCharacter::Interact);
 
 }
 
@@ -65,6 +76,7 @@ void APugCharacter::MoveSides(float Value)
 	}
 }
 
+//Controls
 void APugCharacter::StartJump()
 {
 	bPressedJump = true;
@@ -75,3 +87,33 @@ void APugCharacter::StopJump()
 	bPressedJump = false;
 }
 
+void APugCharacter::Interact()
+{
+	if (Door)
+	{
+		Door->OpenDoor();
+	}
+}
+
+void APugCharacter::OnDeath()
+{
+	UWorld* MyWorld = GetWorld();
+	FString CurrentMapName = MyWorld->GetMapName();
+	FName CurrentMap = FName(*CurrentMapName);
+
+	UGameplayStatics::OpenLevel(GetWorld(), CurrentMap);
+}
+
+void APugCharacter::Damage(int DamageAmount)
+{
+	if (!InvincibilityFrame)
+	{
+		Health -= DamageAmount;
+		if (Health <= 0)
+		{
+			OnDeath();
+		}
+		InvincibilityFrame = true;
+		InvulTimer = 0;
+	}
+}
