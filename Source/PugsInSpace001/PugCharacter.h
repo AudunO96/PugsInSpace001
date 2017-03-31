@@ -58,4 +58,16 @@ public:
 	bool InvincibilityFrame;
 
 	ALevelDoor* Door;
+
+	UPROPERTY(VisibleAnywhere, Category = Loading)
+	bool Item1 = false;
+	
+	UPROPERTY(VisibleAnywhere, Category = Loading)
+	bool Item2 = false;
+	
+	UPROPERTY(VisibleAnywhere, Category = Loading)
+	bool Item3 = false;
+
+	void SaveGame();
+	void LoadGame();
 };

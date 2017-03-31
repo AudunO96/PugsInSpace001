@@ -117,3 +117,15 @@ void APugCharacter::Damage(int DamageAmount)
 		InvulTimer = 0;
 	}
 }
+
+void APugCharacter::SaveGame()
+{
+	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
+
+	SavedGame->Item1 = this->Item1;
+	SavedGame->Item2 = this->Item2;
+	SavedGame->Item3 = this->Item3;
+
+	UGameplayStatics::SaveGameToSlot(SavedGame, TEXT("LevelChange"), 0);
+
+}
