@@ -69,4 +69,6 @@ public:
 
 	void SaveGame();
 	void LoadGame();
+
+	FString PlayerStart;
 };
