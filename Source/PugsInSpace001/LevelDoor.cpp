@@ -2,6 +2,7 @@
 
 #include "PugsInSpace001.h"
 #include "LevelDoor.h"
+#include "MySaveGame.h"
 #include "PugCharacter.h"
 
 
@@ -61,5 +62,11 @@ void ALevelDoor::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Other
 void ALevelDoor::OpenDoor()
 {
 	UWorld* MyWorld = GetWorld();
+
+	//lagrer hvilken playerstart som ble brukt sist
+	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
+	SavedGame->PlayStartTag = this->DoorTag;
+
+	//åpner levelen som døra leder til
 	UGameplayStatics::OpenLevel(GetWorld(), LoadMapName);
 }

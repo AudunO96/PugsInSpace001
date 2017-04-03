@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PugsInSpace001.h"
+#include "MySaveGame.h"
 #include "PugCharacter.h"
 
 
@@ -16,7 +17,25 @@ APugCharacter::APugCharacter()
 void APugCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (GetWorld())
+	{
+		//Spawns the player at the last saved position if going through a door and coming back
+		if (Controller)
+		{
+			UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
+
+			this->PlayerStart = SavedGame->PlayStartTag;
+
+			auto CurrentGameMode = Cast<AGameModeBase>(GetWorld()->GetAuthGameMode());
+
+			//Get the PlayerStart with the wanted tag:
+			AActor *NewPawn = CurrentGameMode->FindPlayerStart(Controller, PlayerStart);
+			SetActorLocation(NewPawn->GetActorLocation());
+			Controller->ClientSetRotation(NewPawn->GetActorRotation());
+		}
+	}
+	LoadGame();	
 }
 
 // Called every frame
@@ -32,7 +51,6 @@ void APugCharacter::Tick(float DeltaTime)
 			InvincibilityFrame = false;
 		}
 	}
-
 }
 
 // Called to bind functionality to input
@@ -91,12 +109,18 @@ void APugCharacter::Interact()
 {
 	if (Door)
 	{
+		SaveGame();
 		Door->OpenDoor();
 	}
 	else if (Item)
 	{
 		Item->ObtainItem();
+		SaveGame();
 	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Objekt 1: %s"), (this->Pickups[0] ? TEXT("True") : TEXT("False")));
+	UE_LOG(LogTemp, Warning, TEXT("Objekt 2: %s"), (this->Pickups[1] ? TEXT("True") : TEXT("False")));
+	UE_LOG(LogTemp, Warning, TEXT("Objekt 3: %s"), (this->Pickups[2] ? TEXT("True") : TEXT("False")));
 }
 
 void APugCharacter::OnDeath()
@@ -131,12 +155,15 @@ void APugCharacter::SaveGame()
 	SavedGame->Item3 = this->Pickups[2];
 
 	UGameplayStatics::SaveGameToSlot(SavedGame, TEXT("LevelChange"), 0);
-
 }
 
 void APugCharacter::LoadGame()
 {
+	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
 
+	this->Pickups[0] = SavedGame->Item1;
+	this->Pickups[1] = SavedGame->Item2;
+	this->Pickups[2] = SavedGame->Item3;
 }
 
 void APugCharacter::GetPickup(int32 PickupID)
