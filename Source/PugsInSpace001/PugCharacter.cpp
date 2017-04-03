@@ -93,6 +93,10 @@ void APugCharacter::Interact()
 	{
 		Door->OpenDoor();
 	}
+	else if (Item)
+	{
+		Item->ObtainItem();
+	}
 }
 
 void APugCharacter::OnDeath()
@@ -122,10 +126,27 @@ void APugCharacter::SaveGame()
 {
 	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
 
-	SavedGame->Item1 = this->Item1;
-	SavedGame->Item2 = this->Item2;
-	SavedGame->Item3 = this->Item3;
+	SavedGame->Item1 = this->Pickups[0];
+	SavedGame->Item2 = this->Pickups[1];
+	SavedGame->Item3 = this->Pickups[2];
 
 	UGameplayStatics::SaveGameToSlot(SavedGame, TEXT("LevelChange"), 0);
 
+}
+
+void APugCharacter::LoadGame()
+{
+
+}
+
+void APugCharacter::GetPickup(int32 PickupID)
+{
+	if (PickupID >= 0 && PickupID < Pickups.Num())
+	{
+		Pickups[PickupID] = true;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Pickup insane in the membrane!"));
+	}
 }
