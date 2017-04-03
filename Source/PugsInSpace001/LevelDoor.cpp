@@ -18,7 +18,7 @@ void ALevelDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CollisionBox = this->FindComponentByClass<UCapsuleComponent>(); //Kollisjon
+	CollisionBox = this->FindComponentByClass<UBoxComponent>(); //Kollisjon
 	if (CollisionBox)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ALevelDoor::OnOverlap);
