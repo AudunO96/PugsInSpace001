@@ -48,8 +48,8 @@ public:
 	UFUNCTION()
 		void Damage(int DamageAmount);
 
-	UPROPERTY(EditAnywhere)
-		int32 Health = 5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
+		float Health = 1;
 
 	UPROPERTY(EditAnywhere)
 		float InvulTime;
