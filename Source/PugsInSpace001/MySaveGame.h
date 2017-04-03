@@ -26,6 +26,6 @@ public:
 		UPROPERTY(VisibleAnywhere, Category = Loading)
 		FName CurrentLevel;
 
-		UPROPERTY(VisibleAnywhere, Category = Loading)
+		UPROPERTY(EditAnywhere, Category = Loading)
 		FString PlayStartTag;
 };
