@@ -40,7 +40,7 @@ void AItemPickups::ObtainItem()
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APugCharacter::StaticClass(), Pugs);
 
 	APugCharacter* Puglet = Cast<APugCharacter>(Pugs[0]);
-	
+
 	Puglet->GetPickup(ItemID);
 	Destroy();
 }
