@@ -70,5 +70,7 @@ public:
 	void SaveGame();
 	void LoadGame();
 
-	FString PlayerStart;
+	UPROPERTY(EditAnywhere, Category = "PlayerStart")
+		FVector PlayerStart = FVector(100, 0, 20.0f);
+
 };
