@@ -65,9 +65,9 @@ void ALevelDoor::OpenDoor()
 
 	//lagrer hvilken playerstart som ble brukt sist
 	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
-	SavedGame->PlayStartTag = this->DoorTag;
+	SavedGame->PlayStartTag = this->DoorVector;
 
-	UE_LOG(LogTemp, Warning, TEXT("Dette er playerstarten (fra døra): %s"), *SavedGame->PlayStartTag);
+	//UE_LOG(LogTemp, Warning, TEXT("Dette er playerstarten (fra døra): %s"), *SavedGame->PlayStartTag);
 
 	//åpner levelen som døra leder til
 	UGameplayStatics::OpenLevel(GetWorld(), LoadMapName);
