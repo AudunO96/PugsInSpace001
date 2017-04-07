@@ -71,6 +71,6 @@ public:
 	void LoadGame();
 
 	UPROPERTY(EditAnywhere, Category = "PlayerStart")
-		FVector PlayerStart = FVector(100, 0, 20.0f);
+		FVector PlayerStart;
 
 };
