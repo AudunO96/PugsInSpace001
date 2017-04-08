@@ -22,10 +22,13 @@ public:
 
 		UPROPERTY(VisibleAnywhere, Category = PickupBools)
 		bool Item3 = false;
-		
-		UPROPERTY(VisibleAnywhere, Category = Loading)
-		FName CurrentLevel;
 
-		UPROPERTY(VisibleAnywhere, Category = Loading)
-		FString PlayStartTag;
+		UPROPERTY(EditAnywhere, Category = Loading)
+		FVector PlayStartTag;
+
+		UPROPERTY(EditAnywhere, Category = Loading)
+		FString SaveSlot = "SaveGame";
+
+		UPROPERTY(EditAnywhere, Category = Loading)
+		int32 PlayerIndex = 0;
 };

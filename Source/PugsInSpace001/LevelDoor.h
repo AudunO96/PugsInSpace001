@@ -38,6 +38,7 @@ public:
 
 	UShapeComponent* CollisionBox = nullptr;
 
-
+	UPROPERTY(EditAnywhere)
+		FVector DoorVector;
 
 };

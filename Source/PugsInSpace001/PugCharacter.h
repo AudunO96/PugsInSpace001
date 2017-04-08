@@ -4,6 +4,7 @@
 
 #include "GameFramework/Character.h"
 #include "LevelDoor.h"
+#include "ItemPickups.h"
 #include "PugCharacter.generated.h"
 
 UCLASS()
@@ -47,11 +48,14 @@ public:
 	UFUNCTION()
 		void Damage(int DamageAmount);
 
-	UPROPERTY(EditAnywhere)
-		int32 Health = 5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
+		float Health = 1;
 
 	UPROPERTY(EditAnywhere)
 		float InvulTime;
+
+	UPROPERTY(EditAnywhere, Category = "Items")
+		TArray<bool> Pickups;
 
 	float InvulTimer;
 
@@ -59,15 +63,14 @@ public:
 
 	ALevelDoor* Door;
 
-	UPROPERTY(VisibleAnywhere, Category = Loading)
-	bool Item1 = false;
-	
-	UPROPERTY(VisibleAnywhere, Category = Loading)
-	bool Item2 = false;
-	
-	UPROPERTY(VisibleAnywhere, Category = Loading)
-	bool Item3 = false;
+	AItemPickups* Item;
+
+	void GetPickup(int32 PickupID);
 
 	void SaveGame();
 	void LoadGame();
+
+	UPROPERTY(EditAnywhere, Category = "PlayerStart")
+		FVector PlayerStart;
+
 };
