@@ -38,7 +38,7 @@ void APugCharacter::BeginPlay()
 			}
 			else
 			{
-				playerStart = FVector(100.0f, 0.0f, 20.0f);
+				PlayerStart = FVector(100.0f, 0.0f, 20.0f);
 				SetActorLocation(PlayerStart);
 			}
 		}
@@ -137,6 +137,7 @@ void APugCharacter::OnDeath()
 	FString CurrentMapName = MyWorld->GetMapName();
 	FName CurrentMap = FName(*CurrentMapName);
 
+	//endre den neste linja til å referere til en meny
 	UGameplayStatics::OpenLevel(GetWorld(), CurrentMap);
 }
 
