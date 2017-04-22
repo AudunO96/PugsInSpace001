@@ -24,9 +24,6 @@ public:
 		bool Item3 = false;
 
 		UPROPERTY(EditAnywhere, Category = Loading)
-		FVector PlayStartTag;
-
-		UPROPERTY(EditAnywhere, Category = Loading)
 		FString SaveSlot = "SaveGame";
 
 		UPROPERTY(EditAnywhere, Category = Loading)
