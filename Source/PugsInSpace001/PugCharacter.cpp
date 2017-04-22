@@ -28,7 +28,7 @@ void APugCharacter::BeginPlay()
 		{
 			auto CurrentGameMode = Cast<AGameModeBase>(GetWorld()->GetAuthGameMode());
 			UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
-
+ 
 			if (GameInstance)
 			{
 				this-> PlayerStart = GameInstance->SpawnLocation;

@@ -5,7 +5,7 @@
 
 UPugGameInstance::UPugGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-{
+{ 
 
 }
 

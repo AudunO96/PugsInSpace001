@@ -19,5 +19,5 @@ public:
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = LevelSpawning)
 			FVector SpawnLocation;
 	
-	
+	 
 };

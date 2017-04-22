@@ -72,5 +72,5 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "PlayerStart")
 		FVector PlayerStart;
-
+	 
 };
