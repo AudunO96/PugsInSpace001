@@ -64,7 +64,7 @@ void ALevelDoor::OpenDoor()
 	UWorld* MyWorld = GetWorld();
 
 	//lagrer hvilken playerstart som ble brukt sist
-	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
+	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance()); 
 	GameInstance->SpawnLocation = this->DoorVector;
 
 	//åpner levelen som døra leder til
