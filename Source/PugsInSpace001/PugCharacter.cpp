@@ -2,6 +2,7 @@
 
 #include "PugsInSpace001.h"
 #include "MySaveGame.h"
+#include "PugGameInstance.h"
 #include "PugCharacter.h"
 
 
@@ -25,14 +26,12 @@ void APugCharacter::BeginPlay()
 		
 		if (Controller)
 		{
-			UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
-			SavedGame = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(SavedGame->SaveSlot, SavedGame->PlayerIndex));
-
 			auto CurrentGameMode = Cast<AGameModeBase>(GetWorld()->GetAuthGameMode());
-			if (SavedGame)
-			{
-				LoadGame();
+			UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
 
+			if (GameInstance)
+			{
+				this-> PlayerStart = GameInstance->SpawnLocation;
 				SetActorLocation(PlayerStart);
 				//Controller->ClientSetRotation(NewPawn->GetActorRotation());
 			}
@@ -163,8 +162,6 @@ void APugCharacter::SaveGame()
 	SavedGame->Item2 = this->Pickups[1];
 	SavedGame->Item3 = this->Pickups[2];
 
-	SavedGame->PlayStartTag = this->PlayerStart;
-
 	UGameplayStatics::SaveGameToSlot(SavedGame, SavedGame->SaveSlot, SavedGame->PlayerIndex);
 }
 
@@ -179,8 +176,6 @@ void APugCharacter::LoadGame()
 		this->Pickups[0] = SavedGame->Item1;
 		this->Pickups[1] = SavedGame->Item2;
 		this->Pickups[2] = SavedGame->Item3;
-
-		this->PlayerStart = SavedGame->PlayStartTag;
 	}
 	else
 	{

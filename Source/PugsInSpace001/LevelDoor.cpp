@@ -2,7 +2,7 @@
 
 #include "PugsInSpace001.h"
 #include "LevelDoor.h"
-#include "MySaveGame.h"
+#include "PugGameInstance.h"
 #include "PugCharacter.h"
 
 
@@ -64,10 +64,8 @@ void ALevelDoor::OpenDoor()
 	UWorld* MyWorld = GetWorld();
 
 	//lagrer hvilken playerstart som ble brukt sist
-	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
-	SavedGame->PlayStartTag = this->DoorVector;
-
-	//UE_LOG(LogTemp, Warning, TEXT("Dette er playerstarten (fra døra): %s"), *SavedGame->PlayStartTag);
+	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
+	GameInstance->SpawnLocation = this->DoorVector;
 
 	//åpner levelen som døra leder til
 	UGameplayStatics::OpenLevel(GetWorld(), LoadMapName);
