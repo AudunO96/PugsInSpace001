@@ -31,7 +31,7 @@ void APugCharacter::BeginPlay()
  
 			if (GameInstance)
 			{
-				this-> PlayerStart = GameInstance->SpawnLocation;
+				this->PlayerStart = GameInstance->SpawnLocation;
 				SetActorLocation(PlayerStart);
 				//Controller->ClientSetRotation(NewPawn->GetActorRotation());
 			}
