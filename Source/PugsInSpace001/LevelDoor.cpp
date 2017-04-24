@@ -67,6 +67,8 @@ void ALevelDoor::OpenDoor()
 	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance()); 
 	GameInstance->SpawnLocation = this->DoorVector;
 
+	
+
 	//åpner levelen som døra leder til
 	UGameplayStatics::OpenLevel(GetWorld(), LoadMapName);
 }
