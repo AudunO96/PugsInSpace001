@@ -14,13 +14,13 @@ class PUGSINSPACE001_API UMySaveGame : public USaveGame
 	GENERATED_BODY()
 
 public:
-		UPROPERTY(VisibleAnywhere, Category = PickupBools)
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = PickupBools)
 		bool Item1 = false;
 
-		UPROPERTY(VisibleAnywhere, Category = PickupBools)
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = PickupBools)
 		bool Item2 = false;
 
-		UPROPERTY(VisibleAnywhere, Category = PickupBools)
+		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = PickupBools)
 		bool Item3 = false; 
 
 		UPROPERTY(EditAnywhere, Category = Loading)
