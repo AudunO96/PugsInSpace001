@@ -21,10 +21,7 @@ public:
 		bool Item2 = false;
 
 		UPROPERTY(VisibleAnywhere, Category = PickupBools)
-		bool Item3 = false;
-
-		UPROPERTY(EditAnywhere, Category = Loading)
-		FVector PlayStartTag;
+		bool Item3 = false; 
 
 		UPROPERTY(EditAnywhere, Category = Loading)
 		FString SaveSlot = "SaveGame";
