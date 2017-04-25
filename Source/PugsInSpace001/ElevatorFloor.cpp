@@ -36,14 +36,12 @@ void AElevatorFloor::Tick(float DeltaTime)
 			{
 				goDown = true;
 				isMoving = true;
-				UE_LOG(LogTemp, Warning, TEXT("heis opp"));
 
 			}
 			else if (goDown == true)
 			{
 				goDown = false;
 				isMoving = true;
-				UE_LOG(LogTemp, Warning, TEXT("heis ned"));
 			}
 		}
 	}
@@ -57,10 +55,6 @@ void AElevatorFloor::Tick(float DeltaTime)
 			if (goDown == true)
 			{
 				speed = -2.0f;
-
-				UE_LOG(LogTemp, Warning, TEXT("gaar opp"));
-				//position.Z = position.Z - speed;
-				//SetActorLocation(position);
 			}
 			else if (goDown == false)
 			{
@@ -72,10 +66,6 @@ void AElevatorFloor::Tick(float DeltaTime)
 			if (goDown == false)
 			{
 				speed = 2.0f;
-
-				UE_LOG(LogTemp, Warning, TEXT("gaar ned"));
-				//position.Z = position.Z + speed;
-				//SetActorLocation(position);
 			}
 			else if (goDown == true)
 			{

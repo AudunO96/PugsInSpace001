@@ -66,8 +66,6 @@ public:
 
 	bool InvincibilityFrame;
 
-	bool flipSwitch = false;
-
 	ALevelDoor* Door;
 
 	AStartElevator* Switch;
