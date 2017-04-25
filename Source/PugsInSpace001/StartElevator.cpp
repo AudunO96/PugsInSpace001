@@ -1,4 +1,5 @@
 // Coded by Audun Olsen and Henrik Engenes 2016/17
+#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Green,text)
 
 #include "PugsInSpace001.h"
 #include "StartElevator.h"
@@ -25,7 +26,7 @@ void AStartElevator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	CollisionBox = this->FindComponentByClass<UCapsuleComponent>(); //Kollisjon
+	CollisionBox = this->FindComponentByClass<UBoxComponent>(); //Kollisjon
 	if (CollisionBox)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AStartElevator::OnOverlap);

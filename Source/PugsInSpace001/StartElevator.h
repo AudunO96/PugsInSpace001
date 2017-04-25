@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "StartElevator.generated.h"
 
+
 UCLASS()
 class PUGSINSPACE001_API AStartElevator : public AActor
 {
@@ -31,6 +32,8 @@ public:
 		void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 
-			UShapeComponent* CollisionBox = nullptr;
+	UShapeComponent* CollisionBox = nullptr;
+
+
 			
 };
