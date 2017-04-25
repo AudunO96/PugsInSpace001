@@ -11,6 +11,7 @@ AItemPickups::AItemPickups()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+
 }
 
 // Called when the game starts or when spawned
@@ -19,6 +20,17 @@ void AItemPickups::BeginPlay()
 	Super::BeginPlay();
 
 	CollisionBox = this->FindComponentByClass<USphereComponent>(); //Kollisjon
+
+	TArray<AActor*> Pugs;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APugCharacter::StaticClass(), Pugs);
+
+	APugCharacter* Puglet = Cast<APugCharacter>(Pugs[0]);
+
+	CheckPickups[ItemID] = Puglet->Pickups[ItemID];
+
+	if (CheckPickups[ItemID] == true)
+		Destroy();
+
 	if (CollisionBox)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AItemPickups::OnOverlap);
