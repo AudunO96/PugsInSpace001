@@ -31,10 +31,20 @@ public:
 	float minZ = -575.5;
 
 	UPROPERTY(EditAnywhere)
-		float speed = 2.0;
+		float speed = 0.0;
 
 	UFUNCTION()
-		void MoveElevator(bool getToggle);
+		void MoveElevator(bool toggle);
 
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+			UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+			bool bFromSweep, const FHitResult &SweepResult);
+
+	UFUNCTION()
+		void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+
+	UShapeComponent* CollisionBox = nullptr;
 	
 };
