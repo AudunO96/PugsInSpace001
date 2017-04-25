@@ -64,7 +64,7 @@ void ALevelDoor::OpenDoor()
 	UWorld* MyWorld = GetWorld();
 
 	//lagrer hvilken dør som ble brukt sist og setter dens vektor til å være spawnplass for neste rom (skal gjøre dette hvert fall)
-	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance()); 
+	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
 	GameInstance->SpawnLocation = this->DoorVector;
 
 	

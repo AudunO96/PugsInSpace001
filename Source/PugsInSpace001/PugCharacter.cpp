@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Green,text)
 
 #include "PugsInSpace001.h"
-#include "MySaveGame.h"
 #include "PugGameInstance.h"
 #include "PugCharacter.h"
 
@@ -43,6 +43,8 @@ void APugCharacter::BeginPlay()
 		}
 	}
 	LoadGame();	
+
+
 }
 
 // Called every frame
@@ -124,10 +126,10 @@ void APugCharacter::Interact()
 		Item->ObtainItem();
 		SaveGame();
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("Objekt 1: %s"), (this->Pickups[0] ? TEXT("True") : TEXT("False")));
-	UE_LOG(LogTemp, Warning, TEXT("Objekt 2: %s"), (this->Pickups[1] ? TEXT("True") : TEXT("False")));
-	UE_LOG(LogTemp, Warning, TEXT("Objekt 3: %s"), (this->Pickups[2] ? TEXT("True") : TEXT("False")));
+	else if (Switch)
+	{
+		Switch->MoveElevator(true);
+	}
 }
 
 void APugCharacter::OnDeath()
@@ -156,26 +158,22 @@ void APugCharacter::Damage(int DamageAmount)
 
 void APugCharacter::SaveGame()
 {
-	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
+	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
 
-	SavedGame->Item1 = this->Pickups[0];
-	SavedGame->Item2 = this->Pickups[1];
-	SavedGame->Item3 = this->Pickups[2];
-
-	UGameplayStatics::SaveGameToSlot(SavedGame, SavedGame->SaveSlot, SavedGame->PlayerIndex);
+	GameInstance->item1 = this->Pickups[0];
+	GameInstance->item2 = this->Pickups[1];
+	GameInstance->item3 = this->Pickups[2];
 }
 
 void APugCharacter::LoadGame()
 {
-	UMySaveGame* SavedGame = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
+	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
 
-	SavedGame = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(SavedGame->SaveSlot, SavedGame->PlayerIndex));
-
-	if (SavedGame)
+	if (GameInstance)
 	{
-		this->Pickups[0] = SavedGame->Item1;
-		this->Pickups[1] = SavedGame->Item2;
-		this->Pickups[2] = SavedGame->Item3;
+		this->Pickups[0] = GameInstance->item1;
+		this->Pickups[1] = GameInstance->item2;
+		this->Pickups[2] = GameInstance->item3;
 	}
 	else
 	{
