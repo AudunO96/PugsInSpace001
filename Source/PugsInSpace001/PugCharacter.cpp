@@ -128,7 +128,7 @@ void APugCharacter::Interact()
 	}
 	else if (Switch)
 	{
-		Switch->MoveElevator(true);
+		Lift->MoveElevator(true);
 	}
 }
 

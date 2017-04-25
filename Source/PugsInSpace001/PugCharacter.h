@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "LevelDoor.h"
 #include "ItemPickups.h"
+#include "StartElevator.h"
 #include "ElevatorFloor.h"
 #include "PugCharacter.generated.h"
 
@@ -69,7 +70,9 @@ public:
 
 	AItemPickups* Item;
 
-	AElevatorFloor* Switch;
+	AStartElevator* Switch;
+
+	AElevatorFloor* Lift;
 
 	void GetPickup(int32 PickupID);
 

@@ -34,7 +34,7 @@ public:
 		float speed = 2.0;
 
 	UFUNCTION()
-		void MoveElevator(bool getToggle)
+		void MoveElevator(bool getToggle);
 
 	
 };
