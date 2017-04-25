@@ -17,18 +17,19 @@ void AStartElevator::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CollisionBox = this->FindComponentByClass<UCapsuleComponent>(); //Kollisjon
-	if (CollisionBox)
-	{
-		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AStartElevator::OnOverlap);
-		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AStartElevator::OnOverlapEnd);
-	}
 }
 
 // Called every frame
 void AStartElevator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	/*
+	CollisionBox = this->FindComponentByClass<UCapsuleComponent>(); //Kollisjon
+	if (CollisionBox)
+	{
+		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AStartElevator::OnOverlap);
+		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AStartElevator::OnOverlapEnd);
+	}OtherBodyIndex);
+	*/
 }
 
