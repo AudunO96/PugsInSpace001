@@ -66,13 +66,16 @@ public:
 
 	bool InvincibilityFrame;
 
-	ALevelDoor* Door;
+	bool flipSwitch = false;
 
-	AItemPickups* Item;
+	ALevelDoor* Door;
 
 	AStartElevator* Switch;
 
 	AElevatorFloor* Lift;
+
+	AItemPickups* Item;
+
 
 	void GetPickup(int32 PickupID);
 
