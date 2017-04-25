@@ -21,16 +21,6 @@ void AItemPickups::BeginPlay()
 
 	CollisionBox = this->FindComponentByClass<USphereComponent>(); //Kollisjon
 
-	TArray<AActor*> Pugs;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APugCharacter::StaticClass(), Pugs);
-
-	APugCharacter* Puglet = Cast<APugCharacter>(Pugs[0]);
-
-	CheckPickups[ItemID] = Puglet->Pickups[ItemID];
-
-	if (CheckPickups[ItemID] == true)
-		Destroy();
-
 	if (CollisionBox)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AItemPickups::OnOverlap);
