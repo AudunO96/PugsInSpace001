@@ -24,14 +24,17 @@ public:
 
 	bool toggleSwitch = false;
 
+	bool isMoving = false;
 	bool goDown = false;
-	bool goUp = false;
 
 	float maxZ = 25.0;
 	float minZ = -575.5;
 
 	UPROPERTY(EditAnywhere)
 		float speed = 2.0;
+
+	UFUNCTION()
+		void MoveElevator(bool getToggle)
 
 	
 };

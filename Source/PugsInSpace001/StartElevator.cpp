@@ -2,6 +2,7 @@
 
 #include "PugsInSpace001.h"
 #include "StartElevator.h"
+#include "PugCharacter.h"
 
 
 // Sets default values
@@ -23,13 +24,33 @@ void AStartElevator::BeginPlay()
 void AStartElevator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	/*
+	
 	CollisionBox = this->FindComponentByClass<UCapsuleComponent>(); //Kollisjon
 	if (CollisionBox)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AStartElevator::OnOverlap);
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AStartElevator::OnOverlapEnd);
-	}OtherBodyIndex);
-	*/
+	}
+
 }
 
+void AStartElevator::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult &SweepResult)
+{
+	if (OtherActor->IsA(APugCharacter::StaticClass()))
+	{
+		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
+		Puglet->Switch = this;
+	}
+}
+
+
+void AStartElevator::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (OtherActor->IsA(APugCharacter::StaticClass()))
+	{
+		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
+		Puglet->Switch = nullptr;
+	}
+}
