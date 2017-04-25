@@ -18,6 +18,13 @@ public:
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = LevelSpawning)
 			FVector SpawnLocation;
-	
 	 
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SavingVars)
+			bool item1 = false;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SavingVars)
+			bool item2 = false;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SavingVars)
+			bool item3 = false;
 };
