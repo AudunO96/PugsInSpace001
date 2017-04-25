@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "LevelDoor.h"
 #include "ItemPickups.h"
+#include "ElevatorFloor.h"
 #include "PugCharacter.generated.h"
 
 UCLASS()
@@ -20,7 +21,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -44,7 +45,7 @@ public:
 
 	UFUNCTION()
 		void OnDeath();
-	 
+
 	UFUNCTION()
 		void Damage(int DamageAmount);
 
@@ -54,8 +55,11 @@ public:
 	UPROPERTY(EditAnywhere)
 		float InvulTime;
 
-	UPROPERTY(EditAnywhere, Category = "Items")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Items")
 		TArray<bool> Pickups;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Items")
+		TArray<bool> EmptyPickups = {false, false, false};
 
 	float InvulTimer;
 
@@ -64,6 +68,8 @@ public:
 	ALevelDoor* Door;
 
 	AItemPickups* Item;
+
+	AElevatorFloor* Switch;
 
 	void GetPickup(int32 PickupID);
 
