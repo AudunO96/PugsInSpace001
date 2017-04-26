@@ -36,8 +36,12 @@ public:
 
 	UShapeComponent* CollisionBox = nullptr;
 
+	UFUNCTION()
+		void ShootAtPug();
 
 	FVector pointLaser;
+
+	bool tracking = false;
 
 
 	

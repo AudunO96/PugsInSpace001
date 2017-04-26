@@ -49,6 +49,7 @@ void ALaserCatoid::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *O
 	{
 		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
 		pointLaser = Puglet->GetActorLocation() - ALaserCatoid::GetActorLocation();
+		tracking = true;
 		UE_LOG(LogTemp, Warning, TEXT("Pointing"));
 	}
 }
@@ -58,7 +59,15 @@ void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Oth
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
 		pointLaser = FVector(0.0f, 0.0f, 0.0f);
+		tracking = false;
 		UE_LOG(LogTemp, Warning, TEXT("Not pointing"));
 	}
 }
 
+void ALaserCatoid::ShootAtPug()
+{
+	if (tracking == true)
+	{
+
+	}
+}
