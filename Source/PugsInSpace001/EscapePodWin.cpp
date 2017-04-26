@@ -63,7 +63,8 @@ void AEscapePodWin::WinCondition(bool BoolVal)
 {
 	if (BoolVal)
 	{
-		
+		UWorld* MyWorld = GetWorld();
+
+		UGameplayStatics::OpenLevel(GetWorld(), "Outro");
 	}
 }
-
