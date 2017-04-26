@@ -37,7 +37,7 @@ void APugCharacter::BeginPlay()
 			}
 			else
 			{
-				PlayerStart = FVector(100.0f, 0.0f, 25.0f);
+				PlayerStart = FVector(-422.224365f, -168.297699f, 157.928680f);
 				SetActorLocation(PlayerStart);
 			}
 		}
