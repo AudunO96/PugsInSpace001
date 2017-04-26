@@ -159,7 +159,7 @@ void APugCharacter::OnDeath()
 	UPugGameInstance* PGI = Cast<UPugGameInstance>(GetGameInstance());
 }
 
-void APugCharacter::Damage(int DamageAmount)
+void APugCharacter::Damage(float DamageAmount)
 {
 	if (!InvincibilityFrame)
 	{
