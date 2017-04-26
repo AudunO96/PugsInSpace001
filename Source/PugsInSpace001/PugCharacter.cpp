@@ -133,6 +133,17 @@ void APugCharacter::Interact()
 			Lift->MoveElevator(true);
 		}
 	}
+	else if (WinBox)
+	{
+		if (Pickups[0] == true && Pickups[1] == true && Pickups[2] == true)
+		{
+			WinBox->WinCondition(true);
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Green, "The escape pod is broken! Find the three necessary objects to fix it!");
+		}
+	}
 
 }
 

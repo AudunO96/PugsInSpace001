@@ -6,6 +6,7 @@
 #include "LevelDoor.h"
 #include "ItemPickups.h"
 #include "StartElevator.h"
+#include "EscapePodWin.h"
 #include "ElevatorFloor.h"
 #include "PugCharacter.generated.h"
 
@@ -74,6 +75,7 @@ public:
 
 	AItemPickups* Item;
 
+	AEscapePodWin* WinBox;
 
 	void GetPickup(int32 PickupID);
 

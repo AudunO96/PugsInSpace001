@@ -1,8 +1,8 @@
 // Coded by Audun Olsen and Henrik Engenes 2016/17
 
 #include "PugsInSpace001.h"
-#include "PugCharacter.h"
 #include "EscapePodWin.h"
+#include "PugCharacter.h"
 
 
 // Sets default values
@@ -17,6 +17,13 @@ AEscapePodWin::AEscapePodWin()
 void AEscapePodWin::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CollisionBox = this->FindComponentByClass<UBoxComponent>(); //Kollisjon
+	if (CollisionBox)
+	{
+		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AEscapePodWin::OnOverlap);
+		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AEscapePodWin::OnOverlapEnd);
+	}
 	
 }
 
@@ -27,26 +34,25 @@ void AEscapePodWin::Tick(float DeltaTime)
 
 }
 
-void ALevelDoor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+void AEscapePodWin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
 	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult &SweepResult)
 {
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
 		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
-		Puglet->Door = this;
+		Puglet->WinBox = this;
 
 	}
 }
 
 
-void ALevelDoor::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AEscapePodWin::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
 		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
-		Puglet->Door = nullptr;
-
+		Puglet->WinBox = nullptr;
 	}
 }
 
@@ -55,6 +61,9 @@ void ALevelDoor::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Other
 
 void AEscapePodWin::WinCondition(bool BoolVal)
 {
-	CanWin = BoolVal;
+	if (BoolVal)
+	{
+		
+	}
 }
 
