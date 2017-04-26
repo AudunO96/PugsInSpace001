@@ -24,6 +24,13 @@ void ALaserCatoid::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	CollisionBox = this->FindComponentByClass<USphereComponent>(); //Kollisjon
+	if (CollisionBox)
+	{
+		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ALaserCatoid::OnOverlap);
+		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ALaserCatoid::OnOverlapEnd);
+	}
+
 }
 
 // Called to bind functionality to input
