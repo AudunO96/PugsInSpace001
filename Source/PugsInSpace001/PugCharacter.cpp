@@ -128,16 +128,10 @@ void APugCharacter::Interact()
 	}
 	else if (Switch)
 	{
-		flipSwitch = true;
-		if (Lift) 
+		if(Lift)
 		{
-			Lift->MoveElevator(flipSwitch);
-			UE_LOG(LogTemp, Warning, TEXT("stuff"));
+			Lift->MoveElevator(true);
 		}
-	}
-	else
-	{
-		flipSwitch = false;
 	}
 
 }
