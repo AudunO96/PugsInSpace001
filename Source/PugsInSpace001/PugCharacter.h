@@ -49,7 +49,7 @@ public:
 		void OnDeath();
 
 	UFUNCTION()
-		void Damage(int DamageAmount);
+		void Damage(float DamageAmount);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
 		float Health = 1;
