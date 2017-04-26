@@ -1,6 +1,7 @@
 // Coded by Audun Olsen and Henrik Engenes 2016/17
 
 #include "PugsInSpace001.h"
+#include "PugCharacter.h"
 #include "LaserCatoid.h"
 
 
@@ -38,5 +39,26 @@ void ALaserCatoid::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ALaserCatoid::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult &SweepResult)
+{
+	if (OtherActor->IsA(APugCharacter::StaticClass()))
+	{
+		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
+		pointLaser = Puglet->GetActorLocation() - ALaserCatoid::GetActorLocation();
+		UE_LOG(LogTemp, Warning, TEXT("Pointing"));
+	}
+}
+
+void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (OtherActor->IsA(APugCharacter::StaticClass()))
+	{
+		pointLaser = FVector(0.0f, 0.0f, 0.0f);
+		UE_LOG(LogTemp, Warning, TEXT("Not pointing"));
+	}
 }
 
