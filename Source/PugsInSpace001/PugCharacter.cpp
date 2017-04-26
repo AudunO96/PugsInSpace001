@@ -143,7 +143,9 @@ void APugCharacter::OnDeath()
 	FName CurrentMap = FName(*CurrentMapName);
 
 	//endre den neste linja til å referere til en meny
-	UGameplayStatics::OpenLevel(GetWorld(), CurrentMap);
+	UGameplayStatics::OpenLevel(GetWorld(), "Barracks");
+	
+	UPugGameInstance* PGI = Cast<UPugGameInstance>(GetGameInstance());
 }
 
 void APugCharacter::Damage(int DamageAmount)
