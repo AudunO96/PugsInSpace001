@@ -5,9 +5,10 @@
 #include "GameFramework/Character.h"
 #include "LevelDoor.h"
 #include "ItemPickups.h"
-#include "StartElevator.h"
 #include "EscapePodWin.h"
+#include "DamageVolume.h"
 #include "ElevatorFloor.h"
+#include "StartElevator.h"
 #include "PugCharacter.generated.h"
 
 UCLASS()
@@ -76,6 +77,8 @@ public:
 	AItemPickups* Item;
 
 	AEscapePodWin* WinBox;
+
+	ADamageVolume* DeathObj;
 
 	void GetPickup(int32 PickupID);
 

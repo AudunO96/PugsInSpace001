@@ -141,7 +141,7 @@ void APugCharacter::Interact()
 		}
 		else
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 0, FColor::Green, "The escape pod is broken! Find the three necessary objects to fix it!");
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "The escape pod is broken! Find the three necessary objects to fix it!");
 		}
 	}
 
@@ -153,10 +153,13 @@ void APugCharacter::OnDeath()
 	FString CurrentMapName = MyWorld->GetMapName();
 	FName CurrentMap = FName(*CurrentMapName);
 
-	//endre den neste linja til å referere til en meny
+	//Caster til player-kontroller og fader ut kameraet
+	class APlayerController* MyPC = Cast<APlayerController>(Controller);
+	MyPC->ClientSetCameraFade(true, FColor::Black, FVector2D(1.0, 0.0), 10.0f, true);
+	Destroy();
+
+	//loader level
 	UGameplayStatics::OpenLevel(GetWorld(), "Barracks");
-	
-	UPugGameInstance* PGI = Cast<UPugGameInstance>(GetGameInstance());
 }
 
 void APugCharacter::Damage(float DamageAmount)
