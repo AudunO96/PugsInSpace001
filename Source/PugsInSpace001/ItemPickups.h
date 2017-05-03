@@ -39,9 +39,6 @@ public:
 
 	UShapeComponent* CollisionBox = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Items")
-		TArray<bool> CheckPickups;
-
 	//APugCharacter* Puglet;
 	
 };

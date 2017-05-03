@@ -52,11 +52,17 @@ public:
 	UFUNCTION()
 		void Damage(float DamageAmount);
 
+	UFUNCTION()
+		void DeathComplete();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
 		float Health = 1;
 
 	UPROPERTY(EditAnywhere)
 		float InvulTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Death")
+		float DeathTime = 4.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Items")
 		TArray<bool> Pickups;
@@ -64,7 +70,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Items")
 		TArray<bool> EmptyPickups = {false, false, false};
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Death")
+		bool isDying = false;
+
 	float InvulTimer;
+
+	float DeathTimer;
 
 	bool InvincibilityFrame;
 

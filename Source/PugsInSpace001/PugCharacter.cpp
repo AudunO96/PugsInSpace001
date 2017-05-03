@@ -60,6 +60,15 @@ void APugCharacter::Tick(float DeltaTime)
 			InvincibilityFrame = false;
 		}
 	}
+
+	if (isDying)
+	{
+		DeathTimer += DeltaTime;
+		if (DeathTimer >= DeathTime)
+		{
+			DeathComplete();
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -79,7 +88,7 @@ void APugCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void APugCharacter::MoveForward(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f))
+	if ((Controller != NULL) && (Value != 0.0f) && !isDying)
 	{
 		// finner ut hvilken vei som er frem
 		FRotator Rotation = Controller->GetControlRotation();
@@ -92,7 +101,7 @@ void APugCharacter::MoveForward(float Value)
 
 void APugCharacter::MoveSides(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f))
+	if ((Controller != NULL) && (Value != 0.0f) && !isDying)
 	{
 		// finner retningen karakteren står i
 		FRotator Rotation = Controller->GetControlRotation();
@@ -106,16 +115,18 @@ void APugCharacter::MoveSides(float Value)
 //Controls
 void APugCharacter::StartJump()
 {
+	if(!isDying)
 	bPressedJump = true;
 }
 
 void APugCharacter::StopJump()
 {
+	if(!isDying)
 	bPressedJump = false;
 }
 
 void APugCharacter::Interact()
-{
+{   //sjekker hvilket object pugen interakterer med
 	if (Door)
 	{
 		Door->OpenDoor();
@@ -141,6 +152,12 @@ void APugCharacter::Interact()
 		}
 		else
 		{
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
+			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
 			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "The escape pod is broken! Find the three necessary objects to fix it!");
 		}
 	}
@@ -149,17 +166,21 @@ void APugCharacter::Interact()
 
 void APugCharacter::OnDeath()
 {
+	isDying = true;
+}
+
+void APugCharacter::DeathComplete()
+{
 	UWorld* MyWorld = GetWorld();
 	FString CurrentMapName = MyWorld->GetMapName();
 	FName CurrentMap = FName(*CurrentMapName);
 
-	//Caster til player-kontroller og fader ut kameraet
-	class APlayerController* MyPC = Cast<APlayerController>(Controller);
-	MyPC->ClientSetCameraFade(true, FColor::Black, FVector2D(1.0, 0.0), 10.0f, true);
-	Destroy();
-
 	//loader level
 	UGameplayStatics::OpenLevel(GetWorld(), "Barracks");
+
+	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
+
+	GameInstance->SpawnLocation = FVector(-422.224365f, -168.297699f, 157.928680f);
 }
 
 void APugCharacter::Damage(float DamageAmount)
@@ -167,7 +188,7 @@ void APugCharacter::Damage(float DamageAmount)
 	if (!InvincibilityFrame)
 	{
 		Health -= DamageAmount;
-		if (Health <= 0)
+		if (Health <= 0.001f)
 		{
 			OnDeath();
 		}
