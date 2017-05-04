@@ -26,14 +26,12 @@ void AItemPickups::BeginPlay()
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AItemPickups::OnOverlap);
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AItemPickups::OnOverlapEnd);
 	}
-	
 }
 
 // Called every frame
 void AItemPickups::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AItemPickups::ObtainItem()
@@ -44,6 +42,7 @@ void AItemPickups::ObtainItem()
 	APugCharacter* Puglet = Cast<APugCharacter>(Pugs[0]);
 
 	Puglet->GetPickup(ItemID);
+
 	Destroy();
 }
 

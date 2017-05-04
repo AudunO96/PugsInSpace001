@@ -17,6 +17,13 @@ ADamageVolume::ADamageVolume()
 void ADamageVolume::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CollisionBox = this->FindComponentByClass<UBoxComponent>(); //Kollisjon
+	if (CollisionBox)
+	{
+		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ADamageVolume::OnOverlap);
+		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ADamageVolume::OnOverlapEnd);
+	}
 	
 }
 
