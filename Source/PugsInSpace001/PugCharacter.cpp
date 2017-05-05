@@ -179,7 +179,8 @@ void APugCharacter::DeathComplete()
 	UGameplayStatics::OpenLevel(GetWorld(), "Barracks");
 
 	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
-
+	
+	GameInstance->instanceHealth = 1.0f;
 	GameInstance->SpawnLocation = FVector(-422.224365f, -168.297699f, 157.928680f);
 }
 
@@ -197,21 +198,24 @@ void APugCharacter::Damage(float DamageAmount)
 	}
 }
 
+//lagrer variabler mellom instances
 void APugCharacter::SaveGame()
 {
 	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
 
+	GameInstance->instanceHealth = this->Health;
 	GameInstance->item1 = this->Pickups[0];
 	GameInstance->item2 = this->Pickups[1];
 	GameInstance->item3 = this->Pickups[2];
 }
-
+//laster variabler mellom instances
 void APugCharacter::LoadGame()
 {
 	UPugGameInstance* GameInstance = Cast<UPugGameInstance>(GetGameInstance());
 
 	if (GameInstance)
 	{
+		this->Health = GameInstance->instanceHealth;
 		this->Pickups[0] = GameInstance->item1;
 		this->Pickups[1] = GameInstance->item2;
 		this->Pickups[2] = GameInstance->item3;
