@@ -27,4 +27,7 @@ public:
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SavingVars)
 			bool item3 = false;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
+			float instanceHealth = 1;
 };
