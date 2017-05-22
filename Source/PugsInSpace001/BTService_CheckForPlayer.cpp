@@ -5,13 +5,13 @@
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BlackBoard/BlackboardKeyAllTypes.h"
-#include "PugCharacter.h"
+#include "PugCharacter.h" 
 #include "HammerAI.h"
 #include "HammerCat.h"
 #include "BTService_CheckForPlayer.h"
 
 
-
+ 
 UBTService_CheckForPlayer::UBTService_CheckForPlayer()
 {
 	bCreateNodeInstance = true;

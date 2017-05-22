@@ -26,7 +26,7 @@ void AHammerAI::Possess(APawn *InPawn)
 	{
 		BlackboardComp->InitializeBlackboard(*Char->BotBehavior->BlackboardAsset);
 
-		EnemyKeyID = BlackboardComp->GetKeyID("Target");
+		EnemyKeyID = BlackboardComp->GetKeyID("Target");  
 
 		BehaviorComp->StartTree(*Char->BotBehavior);
 	}

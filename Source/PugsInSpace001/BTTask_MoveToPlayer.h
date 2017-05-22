@@ -6,7 +6,7 @@
 #include "BTTask_MoveToPlayer.generated.h"
 
 /**
- * 
+ *   
  */
 UCLASS()
 class PUGSINSPACE001_API UBTTask_MoveToPlayer : public UBTTask_BlackboardBase
@@ -16,5 +16,7 @@ class PUGSINSPACE001_API UBTTask_MoveToPlayer : public UBTTask_BlackboardBase
 public:
 
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+	//EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 	
 };
