@@ -4,6 +4,7 @@
 
 #include "GameFramework/Character.h"
 #include "PugCharacter.h"
+#include "Laser.h"
 #include "LaserCatoid.generated.h"
 
 UCLASS()
@@ -36,8 +37,8 @@ public:
 
 	UShapeComponent* CollisionBox = nullptr;
 
-	UFUNCTION()
-		void ShootAtPug();
+	UPROPERTY(EditAnywhere, Category = "Shooting")
+		TSubclassOf<class ALaser> Laser_BP;
 
 	FVector pointLaser;
 

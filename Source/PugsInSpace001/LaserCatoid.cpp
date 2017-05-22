@@ -32,6 +32,19 @@ void ALaserCatoid::Tick(float DeltaTime)
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ALaserCatoid::OnOverlapEnd);
 	}
 
+
+	if (tracking == true)
+	{
+
+		UWorld* World = GetWorld();
+
+		if (World)
+		{
+			FVector Location = GetActorLocation();
+			World->SpawnActor<ALaser>(Laser_BP, Location, FRotator::ZeroRotator);
+		}
+	}
+
 }
 
 // Called to bind functionality to input
@@ -60,14 +73,5 @@ void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Oth
 	{
 		pointLaser = FVector(0.0f, 0.0f, 0.0f);
 		tracking = false;
-		UE_LOG(LogTemp, Warning, TEXT("Not pointing"));
-	}
-}
-
-void ALaserCatoid::ShootAtPug()
-{
-	if (tracking == true)
-	{
-
 	}
 }
