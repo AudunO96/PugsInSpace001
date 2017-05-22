@@ -10,8 +10,8 @@
  */
 UCLASS()
 class PUGSINSPACE001_API UBTService_CheckForPlayer : public UBTService
-{
-	GENERATED_BODY()
+{ 
+	GENERATED_BODY() 
 
 public: 
 

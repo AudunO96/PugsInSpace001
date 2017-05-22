@@ -8,7 +8,7 @@
 AHammerCat::AHammerCat()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true; 
 
 }
 
@@ -16,7 +16,7 @@ AHammerCat::AHammerCat()
 void AHammerCat::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	 
 }
 
 // Called every frame
@@ -33,3 +33,28 @@ void AHammerCat::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 }
 
+void AHammerCat::OnOverlapSense(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult &SweepResult)
+{
+
+}
+
+void AHammerCat::OnOverlapEndSense(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+
+}
+
+void AHammerCat::OnOverlapMelee(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult &SweepResult)
+{
+
+}
+
+void AHammerCat::OnOverlapEndMelee(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+
+}

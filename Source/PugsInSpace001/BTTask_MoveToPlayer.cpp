@@ -5,13 +5,13 @@
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BlackBoard/BlackboardKeyAllTypes.h"
-#include "HammerAI.h"
 #include "PugCharacter.h"
+#include "HammerAI.h"
 #include "HammerCat.h"
 #include "BTTask_MoveToPlayer.h"
 
 
-EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	AHammerAI *CharPC = Cast<AHammerAI>(OwnerComp.GetAIOwner());
 
@@ -22,7 +22,7 @@ EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 		CharPC->MoveToActor(Enemy, 5.f, true, true, true, 0, true);
 		return EBTNodeResult::Succeeded;
 	}
-	else
+	else 
 	{
 		return EBTNodeResult::Failed;
 	}

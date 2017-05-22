@@ -10,7 +10,7 @@
  */
 UCLASS()
 class PUGSINSPACE001_API AHammerAI : public AAIController
-{
+{ 
 	GENERATED_BODY()
 
 	UPROPERTY(transient)
@@ -20,7 +20,7 @@ class PUGSINSPACE001_API AHammerAI : public AAIController
 	class UBehaviorTreeComponent *BehaviorComp;
 
 public: 
-	
+	 
 	AHammerAI();
 
 	virtual void Possess(APawn *InPawn) override;
