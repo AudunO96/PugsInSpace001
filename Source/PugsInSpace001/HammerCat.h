@@ -15,7 +15,7 @@ public:
 	AHammerCat();
 
 	UPROPERTY(EditAnywhere, Category = Behavior)
-		class UBehaviorTree *BotBehavior;
+		class UBehaviorTree *BotBehavior; 
 
 protected:
 	// Called when the game starts or when spawned
@@ -28,6 +28,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void OnOverlapSense(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+		UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+		bool bFromSweep, const FHitResult &SweepResult);
+
+	void OnOverlapEndSense(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
-	
+	void OnOverlapMelee(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+		UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+		bool bFromSweep, const FHitResult &SweepResult);
+
+	void OnOverlapEndMelee(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 };
