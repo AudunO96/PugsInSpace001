@@ -5,6 +5,7 @@
 #include "AIController.h"
 #include "HammerAI.generated.h"
 
+
 /**
  * 
  */
@@ -22,6 +23,8 @@ class PUGSINSPACE001_API AHammerAI : public AAIController
 public: 
 	 
 	AHammerAI();
+
+	class AHammerCat *Char;
 
 	virtual void Possess(APawn *InPawn) override;
 

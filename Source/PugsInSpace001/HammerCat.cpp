@@ -1,6 +1,7 @@
 // Coded by Audun Olsen and Henrik Engenes 2016/17
 
 #include "PugsInSpace001.h"
+#include "PugCharacter.h"
 #include "HammerCat.h"
 
 
@@ -24,6 +25,13 @@ void AHammerCat::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	CollisionBox = this->FindComponentByClass<USphereComponent>(); //Kollisjon
+	if (CollisionBox)
+	{
+		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AHammerCat::OnOverlap);
+		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AHammerCat::OnOverlapEnd);
+	}
+
 }
 
 // Called to bind functionality to input
@@ -33,28 +41,21 @@ void AHammerCat::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 }
 
-void AHammerCat::OnOverlapSense(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+void AHammerCat::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
 	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult &SweepResult)
 {
-
+	if (OtherActor->IsA(APugCharacter::StaticClass()))
+	{
+		isSensing = true;
+	}
 }
 
-void AHammerCat::OnOverlapEndSense(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+void AHammerCat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-
-}
-
-void AHammerCat::OnOverlapMelee(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
-	UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
-	bool bFromSweep, const FHitResult &SweepResult)
-{
-
-}
-
-void AHammerCat::OnOverlapEndMelee(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
+	if (OtherActor->IsA(APugCharacter::StaticClass()))
+	{
+		isSensing = false;
+	}
 }
