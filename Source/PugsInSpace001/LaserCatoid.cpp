@@ -70,7 +70,8 @@ void ALaserCatoid::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *O
 	}
 }
 
-void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
