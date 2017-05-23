@@ -30,6 +30,7 @@ void ALaser::Tick(float DeltaTime)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ALaser::OnOverlap);
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ALaser::OnOverlapEnd);
+
 	}
 }
 

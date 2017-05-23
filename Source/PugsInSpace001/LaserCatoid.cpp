@@ -36,13 +36,16 @@ void ALaserCatoid::Tick(float DeltaTime)
 	if (tracking == true)
 	{
 
-		UWorld* World = GetWorld();
+			SetActorRotation(pointLaser.Rotation());
 
-		if (World)
-		{
-			FVector Location = GetActorLocation();
-			World->SpawnActor<ALaser>(Laser_BP, Location, FRotator::ZeroRotator);
-		}
+
+			UWorld* World = GetWorld();
+
+			if (World)
+			{
+				FVector Location = GetActorLocation();
+				World->SpawnActor<ALaser>(Laser_BP, Location, FRotator::ZeroRotator);
+			}
 	}
 
 }
@@ -61,7 +64,7 @@ void ALaserCatoid::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *O
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
 		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
-		pointLaser = Puglet->GetActorLocation() - ALaserCatoid::GetActorLocation();
+		pointLaser = ALaserCatoid::GetActorLocation() + Puglet->GetActorLocation();
 		tracking = true;
 		UE_LOG(LogTemp, Warning, TEXT("Pointing"));
 	}
