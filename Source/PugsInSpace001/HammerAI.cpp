@@ -20,7 +20,7 @@ void AHammerAI::Possess(APawn *InPawn)
 {
 	Super::Possess(InPawn);
 
-	AHammerCat *Char = Cast<AHammerCat>(InPawn);
+	Char = Cast<AHammerCat>(InPawn);
 
 	if (Char && Char->BotBehavior)
 	{

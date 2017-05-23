@@ -15,6 +15,9 @@ class PUGSINSPACE001_API UBTTask_MoveToPlayer : public UBTTask_BlackboardBase
 
 public:
 
+	UPROPERTY(EditAnywhere)
+		bool isSensing = false;
+
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 	//EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
