@@ -18,10 +18,13 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 
 	isSensing = CharPC->Char->isSensing;
 
-	if (Enemy && isSensing)
+	if (Enemy)
 	{
-		CharPC->MoveToActor(Enemy, 5.f, true, true, true, 0, true);
-		return EBTNodeResult::Succeeded;
+		if (isSensing)
+		{
+			CharPC->MoveToActor(Enemy, 5.f, true, true, true, 0, true);
+			return EBTNodeResult::Succeeded;
+		}
 	}
 	else
 	{
