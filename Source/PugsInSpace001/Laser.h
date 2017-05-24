@@ -33,6 +33,9 @@ public:
 
 	UShapeComponent* CollisionBox = nullptr;
 
+	int lifeSpan;
+
+	FVector velocity;
 
 	
 };

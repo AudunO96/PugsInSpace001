@@ -32,20 +32,24 @@ void ALaserCatoid::Tick(float DeltaTime)
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ALaserCatoid::OnOverlapEnd);
 	}
 
-
+	
 	if (tracking == true)
 	{
-
-			SetActorRotation(pointLaser.Rotation());
-
+		recharge--;
+		if (recharge == 0)
+		{
 
 			UWorld* World = GetWorld();
-
+		
 			if (World)
 			{
 				FVector Location = GetActorLocation();
-				World->SpawnActor<ALaser>(Laser_BP, Location, FRotator::ZeroRotator);
+				Location.Z -= 20.0f;
+				FRotator Rotation = GetActorRotation();
+				World->SpawnActor<ALaser>(Laser_BP, Location, Rotation);
+				recharge = 100;
 			}
+		}
 	}
 
 }

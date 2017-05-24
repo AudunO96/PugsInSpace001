@@ -16,8 +16,8 @@ public:
 	// Sets default values for this character's properties
 	ALaserCatoid();
 
-	UPROPERTY(EditAnywhere, Category = "Behaviour")
-		class UBehaviourTree *BotBehaviour;
+	UPROPERTY(EditAnywhere, Category = "Behavior")
+	class UBehaviorTree *BotBehavior;
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,7 +43,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Shooting")
 		TSubclassOf<class ALaser> Laser_BP;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pointer")
 	FVector pointLaser;
+
+	FVector displacement;
+
+	int recharge = 80;
 
 	bool tracking = false;
 

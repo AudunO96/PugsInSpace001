@@ -8,6 +8,8 @@
 #include "PugCharacter.h" 
 #include "HammerAI.h"
 #include "HammerCat.h"
+#include "LaserCatAI.h"
+#include "LaserCatoid.h"
 #include "BTService_CheckForPlayer.h"
 
 
@@ -20,6 +22,7 @@ UBTService_CheckForPlayer::UBTService_CheckForPlayer()
 void UBTService_CheckForPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	AHammerAI *EnemyPC = Cast<AHammerAI>(OwnerComp.GetAIOwner());
+	ALaserCatAI *LaserPC = Cast<ALaserCatAI>(OwnerComp.GetAIOwner());
 
 	if (EnemyPC)
 	{
@@ -28,6 +31,15 @@ void UBTService_CheckForPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 		if (Enemy)
 		{
 			OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->EnemyKeyID, Enemy);
+		}
+	}
+	else if(LaserPC)
+	{
+		APugCharacter *Enemy = Cast<APugCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+		if (Enemy)
+		{
+			OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(LaserPC->EnemyKeyID, Enemy);
 		}
 	}
 }
