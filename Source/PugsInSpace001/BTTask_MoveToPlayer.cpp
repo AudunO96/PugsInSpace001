@@ -16,15 +16,15 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 	AHammerAI *CharPC = Cast<AHammerAI>(OwnerComp.GetAIOwner());
 	APugCharacter *Enemy = Cast<APugCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(CharPC->EnemyKeyID));
 
-	isSensing = CharPC->Char->isSensing;
+	//isSensing = CharPC->Char->isSensing;
 
 	if (Enemy)
 	{
-		if (isSensing)
-		{
+		//if (isSensing)
+		//{
 			CharPC->MoveToActor(Enemy, 5.f, true, true, true, 0, true);
 			return EBTNodeResult::Succeeded;
-		}
+		//}
 	}
 	else
 	{

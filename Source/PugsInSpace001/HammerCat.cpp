@@ -1,8 +1,8 @@
 // Coded by Audun Olsen and Henrik Engenes 2016/17
 
 #include "PugsInSpace001.h"
-#include "PugCharacter.h"
 #include "HammerCat.h"
+#include "PugCharacter.h"
 
 
 // Sets default values
@@ -17,7 +17,6 @@ AHammerCat::AHammerCat()
 void AHammerCat::BeginPlay()
 {
 	Super::BeginPlay();
-	 
 }
 
 // Called every frame
@@ -31,7 +30,6 @@ void AHammerCat::Tick(float DeltaTime)
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AHammerCat::OnOverlap);
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AHammerCat::OnOverlapEnd);
 	}
-
 }
 
 // Called to bind functionality to input
@@ -47,7 +45,12 @@ void AHammerCat::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *Oth
 {
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
-		isSensing = true;
+		//skader karakteren, deretter setter i animasjonsBPen at den angriper
+		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
+		isAttacking = true;
+		Puglet->Damage(0.5f);
+
+		//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "You are being hit!");
 	}
 }
 
@@ -56,6 +59,6 @@ void AHammerCat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Other
 {
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
-		isSensing = false;
+		isAttacking = false;
 	}
 }
