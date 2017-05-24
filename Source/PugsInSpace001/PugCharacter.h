@@ -9,6 +9,7 @@
 #include "DamageVolume.h"
 #include "ElevatorFloor.h"
 #include "StartElevator.h"
+#include "HammerCat.h"
 #include "PugCharacter.generated.h"
 
 UCLASS()
@@ -90,6 +91,8 @@ public:
 	AEscapePodWin* WinBox;
 
 	ADamageVolume* DeathObj;
+
+	AHammerCat* CatHam;
 
 	void GetPickup(int32 PickupID);
 

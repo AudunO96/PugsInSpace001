@@ -152,12 +152,6 @@ void APugCharacter::Interact()
 		}
 		else
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
-			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, " ");
 			GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "The escape pod is broken! Find the three necessary objects to fix it!");
 		}
 	}
@@ -234,6 +228,6 @@ void APugCharacter::GetPickup(int32 PickupID)
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Pickup insane in the membrane!"));
+		UE_LOG(LogTemp, Warning, TEXT("Pickup.... eksisterer ikke?"));
 	}
 }
