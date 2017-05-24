@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "LaserCatoid.h"
 #include "Laser.generated.h"
 
 UCLASS()
@@ -28,10 +29,10 @@ public:
 			UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
 			bool bFromSweep, const FHitResult &SweepResult);
 
-	UFUNCTION()
-		void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
 	UShapeComponent* CollisionBox = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pointer")
+		FVector laserPoint;
 
 	int lifeSpan;
 
