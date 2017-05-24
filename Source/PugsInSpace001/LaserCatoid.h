@@ -52,7 +52,8 @@ public:
 
 	bool tracking = false;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		bool isAttacking;
 	
 	
 };
