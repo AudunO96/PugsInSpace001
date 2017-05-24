@@ -24,26 +24,27 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AISENSE")
-		bool isSensing = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		bool isAttacking = false;
+		bool isSensing;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		bool isMoving = false;
+*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		bool isAttacking;
 
 	UShapeComponent* CollisionBox = nullptr;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
-		UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
-		bool bFromSweep, const FHitResult &SweepResult);
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
+			UPrimitiveComponent *OtherComponent, int32 OtherBodyIndex,
+			bool bFromSweep, const FHitResult &SweepResult);
 
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	UFUNCTION()
+		void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 };
