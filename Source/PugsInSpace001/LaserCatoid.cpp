@@ -38,7 +38,7 @@ void ALaserCatoid::Tick(float DeltaTime)
 		recharge--;
 		if (recharge == 0)
 		{
-
+			isAttacking = true;
 			UWorld* World = GetWorld();
 		
 			if (World)
