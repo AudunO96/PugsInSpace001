@@ -32,16 +32,23 @@ void ALaserCatoid::Tick(float DeltaTime)
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ALaserCatoid::OnOverlapEnd);
 	}
 
-
+	
 	if (tracking == true)
 	{
-
-		UWorld* World = GetWorld();
-
-		if (World)
+		recharge--;
+		if (recharge == 0)
 		{
-			FVector Location = GetActorLocation();
-			World->SpawnActor<ALaser>(Laser_BP, Location, FRotator::ZeroRotator);
+
+			UWorld* World = GetWorld();
+		
+			if (World)
+			{
+				FVector Location = GetActorLocation();
+				Location.Z -= 20.0f;
+				FRotator Rotation = GetActorRotation();
+				World->SpawnActor<ALaser>(Laser_BP, Location, Rotation);
+				recharge = 100;
+			}
 		}
 	}
 
@@ -61,13 +68,14 @@ void ALaserCatoid::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *O
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{
 		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor);
-		pointLaser = Puglet->GetActorLocation() - ALaserCatoid::GetActorLocation();
+		pointLaser = ALaserCatoid::GetActorLocation() + Puglet->GetActorLocation();
 		tracking = true;
 		UE_LOG(LogTemp, Warning, TEXT("Pointing"));
 	}
 }
 
-void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void ALaserCatoid::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (OtherActor->IsA(APugCharacter::StaticClass()))
 	{

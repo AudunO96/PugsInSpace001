@@ -2,6 +2,7 @@
 
 #include "PugsInSpace001.h"
 #include "PugCharacter.h"
+#include "LaserCatoid.h"
 #include "Laser.h"
 
 
@@ -17,20 +18,36 @@ ALaser::ALaser()
 void ALaser::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+//	velocity = 1000.0f * pointLaser;
+
+	lifeSpan = 40;
 }
 
 // Called every frame
 void ALaser::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	lifeSpan--;
 
-	CollisionBox = this->FindComponentByClass<UBoxComponent>(); //Kollisjon
+
+//	FVector NewLocation = GetActorLocation() + (velocity * DeltaTime);
+//	SetActorLocation(NewLocation);
+
+
+	CollisionBox = this->FindComponentByClass<UCapsuleComponent>(); //Kollisjon
 	if (CollisionBox)
 	{
 		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ALaser::OnOverlap);
 		CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ALaser::OnOverlapEnd);
+
 	}
+	if (lifeSpan == 0)
+	{
+		Destroy();
+	}
+
 }
 
 void ALaser::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor,
@@ -41,7 +58,10 @@ void ALaser::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherAc
 	{
 		APugCharacter* Puglet = Cast<APugCharacter>(OtherActor); 
 		Puglet->Damage(0.2f);
+		Destroy();
 	}
+
+
 }
 
 void ALaser::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
